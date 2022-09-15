@@ -40,108 +40,26 @@
                         </div>
                     </div>
                 </div>
+                {% for item in posts %}
                 <div class="col-md-3">
                     <div class="single-post">
-                        <img src="{% static 'img/post-image2.jpg' %}" alt="">
-                        <h3><a href="#">Post Title Goes Here.</a></h3>
-                        <h4><span>Posted By: <span class="author-name">Kabbo Liate</span></span>
+                        {% if item.photo %}
+                        <img src="{{ item.photo.url }}" alt="{{ item.title }}" width="300" height="201">
+                        {% else %}
+                        <img src="https://picsum.photos/id/101/367/267" alt="{{ item.title }}" width="300" height="201">
+                        {% endif %}
+                        <h3><a href="{{ item.get_absolute_url }}">{{ item.title  }}</a></h3>
+                        <h4><span>Posted By: <span class="author-name">{{ item.author }}</span></span>
                         </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed dotempor incididunt ut. labore
-                            et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <h4><span>25 February 2017</span></h4>
+                        {{ item.content|truncatechars_html:100|safe }}
+                        <h4><span>{{ item.created_at|date:"Y.m.d" }}</span></h4>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <div class="single-post">
-                        <img src="{% static 'img/post-image3.jpg' %}" alt="">
-                        <h3><a href="#">Post Title Goes Here.</a></h3>
-                        <h4><span>Posted By: <span class="author-name">Kabbo Liate</span></span>
-                        </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed dotempor incididunt ut. labore
-                            et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <h4><span>25 February 2017</span></h4>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-post">
-                        <img src="{% static 'img/post-image4.jpg' %}" alt="">
-                        <h3><a href="#">Post Title Goes Here.</a></h3>
-                        <h4><span>Posted By: <span class="author-name">Kabbo Liate</span></span>
-                        </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed dotempor incididunt ut. labore
-                            et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <h4><span>25 February 2017</span></h4>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-post">
-                        <img src="{% static 'img/post-image5.jpg' %}" alt="">
-                        <h3><a href="#">Post Title Goes Here.</a></h3>
-                        <h4><span>Posted By: <span class="author-name">Kabbo Liate</span></span>
-                        </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed dotempor incididunt ut. labore
-                            et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <h4><span>25 February 2017</span></h4>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-post">
-                        <img src="{% static 'img/post-image6.jpg' %}" alt="">
-                        <h3><a href="#">Post Title Goes Here.</a></h3>
-                        <h4><span>Posted By: <span class="author-name">Kabbo Liate</span></span>
-                        </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed dotempor incididunt ut. labore
-                            et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <h4><span>25 February 2017</span></h4>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-post">
-                        <img src="{% static 'img/post-image7.jpg' %}" alt="">
-                        <h3><a href="#">Post Title Goes Here.</a></h3>
-                        <h4><span>Posted By: <span class="author-name">Kabbo Liate</span></span>
-                        </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed dotempor incididunt ut. labore
-                            et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <h4><span>25 February 2017</span></h4>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-post">
-                        <img src="{% static 'img/post-image8.jpg' %}" alt="">
-                        <h3><a href="#">Post Title Goes Here.</a></h3>
-                        <h4><span>Posted By: <span class="author-name">Kabbo Liate</span></span>
-                        </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed dotempor incididunt ut. labore
-                            et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <h4><span>25 February 2017</span></h4>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="single-post">
-                        <img src="{% static 'img/post-image9.jpg' %}" alt="">
-                        <h3><a href="#">Post Title Goes Here.</a></h3>
-                        <h4><span>Posted By: <span class="author-name">Kabbo Liate</span></span>
-                        </h4>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed dotempor incididunt ut. labore
-                            et dolore magna aliqua. Ut enim ad minim veniam</p>
-                        <h4><span>25 February 2017</span></h4>
-                    </div>
-                </div>
+                {% endfor %}
+
             </div>
         </div>
     </div>
-    <div class="pegination">
-
-
-        <div class="nav-links">
-            <span class="page-numbers current">1</span>
-            <a class="page-numbers" href="#">2</a>
-            <a class="page-numbers" href="#">3</a>
-            <a class="page-numbers" href="#">4</a>
-            <a class="page-numbers" href="#">5</a>
-            <a class="page-numbers" href="#"><i class="fa fa-angle-right" aria-hidden="true"></i></a>
-        </div>
-    </div>
+{% include 'inc/_pagination.html' %}
 </section>
 {% endblock %}

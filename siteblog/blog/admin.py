@@ -23,7 +23,7 @@ class PostAdmin(admin.ModelAdmin):
     form = PostAdminForm
     prepopulated_fields = {"slug": ("title",)}
     readonly_fields = ('view','created_at','get_photo',)
-    fields = ('title', 'slug', 'tags','content','photo','get_photo','view','created_at',)
+
 
     def get_photo(self, object):
         if object.photo:
