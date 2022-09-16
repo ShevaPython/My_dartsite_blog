@@ -1,0 +1,14 @@
+{% load static %}
+{% load sitebar %}
+<div class="col-md-4">
+
+    {% get_popular_post 5 %}
+    {% get_popular_tags %}
+    <div class="newsletter">
+        <h2 class="sidebar-title">Subscribe To oUR nEWSLETTER</h2>
+        <form action="#" method="post">
+            <input type="email" name="" id="" placeholder="Email">
+            <input type="submit" value="Subscribe">
+        </form>
+    </div>
+</div>

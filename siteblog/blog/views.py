@@ -27,7 +27,7 @@ class PostByCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         contex = super().get_context_data(**kwargs)
-        contex['title'] = Category.objects.get(slug=self.kwargs['slug'])
+        contex['title'] ="Категория->" + str(Category.objects.get(slug=self.kwargs['slug']))
         return contex
 
 
@@ -43,5 +43,17 @@ class GetPost(DetailView):
         self.object.refresh_from_db()
         return contex
 
+
 class PostByTag(ListView):
-    pass
+    template_name = 'blog/show_tags.html'
+    context_object_name = 'posts'
+    paginate_by = 4
+    allow_empty = False
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        contex = super().get_context_data(**kwargs)
+        contex['title'] = 'Категория по тегам-->' + str(Tag.objects.get(slug=self.kwargs['slug']))
+        return contex
+
+    def get_queryset(self):
+        return Post.objects.filter(tags__slug=self.kwargs['slug'])

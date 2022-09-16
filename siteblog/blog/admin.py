@@ -19,10 +19,10 @@ class PostAdmin(admin.ModelAdmin):
     list_display = ('title', 'id', 'created_at', 'is_publish', 'get_photo', 'view',)
     list_display_links = ('id','title')
     search_fields = ('id','title')
-    list_filter = ('category',)
+    list_filter = ('category','tags')
     form = PostAdminForm
     prepopulated_fields = {"slug": ("title",)}
-    readonly_fields = ('view','created_at','get_photo',)
+    readonly_fields = ('view','created_at','get_photo')
 
 
     def get_photo(self, object):
