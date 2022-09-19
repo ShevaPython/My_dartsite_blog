@@ -27,7 +27,7 @@ class PostByCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         contex = super().get_context_data(**kwargs)
-        contex['title'] ="Категория->" + str(Category.objects.get(slug=self.kwargs['slug']))
+        contex['title'] = "Категория->" + str(Category.objects.get(slug=self.kwargs['slug']))
         return contex
 
 
@@ -57,3 +57,17 @@ class PostByTag(ListView):
 
     def get_queryset(self):
         return Post.objects.filter(tags__slug=self.kwargs['slug'])
+
+
+class Search(ListView):
+    template_name = 'blog/search.html'
+    context_object_name = 'posts'
+    paginate_by = 4
+
+    def get_queryset(self):
+        return Post.objects.filter(title__icontains=self.request.GET.get('s'))
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['s'] = F"s={self.request.GET.get('s')}&"
+        return context
